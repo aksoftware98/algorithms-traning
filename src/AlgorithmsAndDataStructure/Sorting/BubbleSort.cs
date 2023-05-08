@@ -36,7 +36,7 @@ namespace Sorting
 			}
 		}
 
-		public static void BubbleSort<T>(T[] array) where T : IComparable<T>
+		public static void Sort<T>(T[] array) where T : IComparable<T>
 		{
 			for (int i = 0; i < array.Length - 1; i++)
 			{

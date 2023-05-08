@@ -7,7 +7,7 @@ public class BubbleSortTests
     {
         var array = new[] { 2, 10, 8, 7 };
 
-        Sort.BubbleSort(array);
+        BubbleSort.Sort(array);
 
         Assert.True(array.SequenceEqual(new[] { 2, 7, 8 , 10}));
     }
