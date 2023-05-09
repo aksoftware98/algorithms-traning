@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Sorting.Tests
 {
-	public class SelectionSortTests
+    public class SelectionSortTests
 	{
 		[Fact]
 		public void SelectionSortShouldSortProperly()

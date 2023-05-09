@@ -3,13 +3,13 @@ namespace Sorting
 {
 
 
-	/// <summary>
-	/// Insertion Sort is very basic
-	/// No extra space needed
-	/// Stable 
-	/// Used for small collections and basic for TimSort and IntraSort (Hybrid)
-	/// </summary>
-	public static class InsertionSort
+    /// <summary>
+    /// Insertion Sort is very basic
+    /// No extra space needed
+    /// Stable 
+    /// Used for small collections and basic for TimSort and IntraSort (Hybrid)
+    /// </summary>
+    public static class InsertionSort
 	{
 
 
