@@ -83,6 +83,44 @@
             }
         }
 
+        public static T[] IntersectionOfTwoSortedArrays<T>(T[] firstArray, T[] secondArray) where T : IComparable<T>
+        {
+            int i = 0;
+            int j = 0;
+            int k = 0; 
+            int newArrayLength = firstArray.Length > secondArray.Length ? secondArray.Length : firstArray.Length;
+            var tempArray = new T[newArrayLength];
+            var foundItems = 0;
+
+            while (i < firstArray.Length && j < secondArray.Length)
+            {
+                if (firstArray[i].CompareTo(secondArray[j]) == 0)
+                {
+                    if (k > 0 && tempArray[k - 1].CompareTo(firstArray[i]) == 0)
+                    {
+                        i++;
+                        j++;
+                    }
+                    else
+                    {
+                        tempArray[k] = firstArray[i];
+                        i++;
+                        j++;
+                        k++;
+                        foundItems++;
+                    }
+                }
+                else if (firstArray[i].CompareTo(secondArray[j]) == 1)
+                {
+                    j++;
+                }
+                else
+                    i++;
+            }
+
+            return tempArray; 
+        }
+
     }
 }
 

@@ -21,6 +21,16 @@
 
             Assert.True(array.SequenceEqual(expected));
         }
+
+        [Theory]
+        [InlineData(new[] {1, 20, 20, 40, 60}, new[] {2, 20, 20, 20, 20 }, new[] { 20, 0, 0, 0, 0 })]
+        [InlineData(new[] { 9, 10, 10, 13, 20 }, new[] { 3, 9, 13, 40, 50 }, new[] { 9, 13, 0, 0, 0 })]
+        public void IntersectionOfTwoSortedArrayShouldWorkAsExpected(int[] firstArray, int[] secondArray, int[] expected)
+        {
+            var result = MergeSort.IntersectionOfTwoSortedArrays(firstArray, secondArray);
+
+            Assert.True(result.SequenceEqual(expected));
+        }
     }
 }
 
