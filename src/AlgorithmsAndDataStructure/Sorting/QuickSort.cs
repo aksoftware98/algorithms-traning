@@ -39,10 +39,17 @@ namespace Sorting
 			}
 		}
 
+		/// <summary>
+		/// This method do only one travese on the array and doesn't require any extra space
+		/// NOTE: This method always supposed that the pivot is the last element, if it's not we need to add an extra step to swap the traget pivot with the last element and continue normally
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="array"></param>
+		/// <param name="low"></param>
+		/// <param name="high"></param>
 		public static void LomutoPartion<T>(T[] array, int low, int high) where T : IComparable<T>
 		{
 			T pivot = array[high];
-			int index = 0;
 			int i = low;
 
 			for (int j = low; j < high; j++)
