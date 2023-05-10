@@ -68,6 +68,36 @@ namespace Sorting
 			array[i] = pivot;
 		}
 
-	}
+        public static void HoarePartition<T>(T[] array, int low, int high) where T : IComparable<T>
+        {
+			int i = low - 1;
+			int j = high + 1;
+			T pivot = array[low];
+
+			while (true)
+			{
+				do
+				{
+					i++; 
+				} while (array[i].CompareTo(pivot) == -1);
+				do
+				{
+					j--;
+				} while (array[j].CompareTo(pivot) == 1);
+				if (j <= i)
+				{
+					return;
+				}
+
+				var temp = array[j];
+				array[j] = array[i];
+				array[i] = temp;
+			}
+
+        }
+
+
+
+    }
 }
 

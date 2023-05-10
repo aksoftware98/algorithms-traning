@@ -19,6 +19,15 @@
 
             Assert.True(array.SequenceEqual(expected));
         }
+
+        [Theory]
+        [InlineData(new[] { 5, 3, 8, 4, 2, 7, 1, 10 }, 0, 7, new[] { 1, 3, 2, 4, 8, 7, 5, 10 })]
+        public void HoarePartioningShoudWorkAsExpected(int[] array, int low, int high, int[] expected)
+        {
+            QuickSort.HoarePartition(array, low, high);
+
+            Assert.True(array.SequenceEqual(expected));
+        }
     }
 }
 
