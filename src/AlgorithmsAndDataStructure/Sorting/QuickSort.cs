@@ -1,6 +1,9 @@
 ﻿using System;
 namespace Sorting
 {
+	/// <summary>
+	/// Unstable sorting Algorithm 
+	/// </summary>
 	public static class QuickSort
 	{
 
@@ -34,6 +37,28 @@ namespace Sorting
 			{
 				array[i] = tempArray[i];
 			}
+		}
+
+		public static void LomutoPartion<T>(T[] array, int low, int high) where T : IComparable<T>
+		{
+			T pivot = array[high];
+			int index = 0;
+			int i = low;
+
+			for (int j = low; j < high; j++)
+			{
+				if (array[j].CompareTo(pivot) == -1)
+				{
+					var temp = array[i];
+					array[i] = array[j];
+					array[j] = temp;
+					i++; 
+				}
+			}
+
+			var tempFinal = array[i];
+			array[high] = tempFinal;
+			array[i] = pivot;
 		}
 
 	}

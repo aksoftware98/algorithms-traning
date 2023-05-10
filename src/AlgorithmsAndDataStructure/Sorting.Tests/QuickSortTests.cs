@@ -10,6 +10,15 @@
 
             Assert.True(array.SequenceEqual(expected));
         }
+
+        [Theory]
+        [InlineData(new[] { 10, 80, 30, 90, 40, 50, 70 }, 0, 6, new[] { 10, 30, 40, 50, 70, 90, 80})]
+        public void LomutoPartioningShoudWorkAsExpected(int[] array, int low, int high, int[] expected)
+        {
+            QuickSort.LomutoPartion(array, low, high);
+
+            Assert.True(array.SequenceEqual(expected));
+        }
     }
 }
 
