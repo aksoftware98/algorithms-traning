@@ -47,7 +47,7 @@ namespace Sorting
 		/// <param name="array"></param>
 		/// <param name="low"></param>
 		/// <param name="high"></param>
-		public static void LomutoPartion<T>(T[] array, int low, int high) where T : IComparable<T>
+		public static int LomutoPartion<T>(T[] array, int low, int high) where T : IComparable<T>
 		{
 			T pivot = array[high];
 			int i = low;
@@ -66,9 +66,11 @@ namespace Sorting
 			var tempFinal = array[i];
 			array[high] = tempFinal;
 			array[i] = pivot;
+
+			return i; 
 		}
 
-        public static void HoarePartition<T>(T[] array, int low, int high) where T : IComparable<T>
+        public static int HoarePartition<T>(T[] array, int low, int high) where T : IComparable<T>
         {
 			int i = low - 1;
 			int j = high + 1;
@@ -86,7 +88,7 @@ namespace Sorting
 				} while (array[j].CompareTo(pivot) == 1);
 				if (j <= i)
 				{
-					return;
+					return j + 1;
 				}
 
 				var temp = array[j];
