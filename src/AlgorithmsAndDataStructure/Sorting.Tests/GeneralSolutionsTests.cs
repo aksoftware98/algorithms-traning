@@ -10,6 +10,15 @@
 
             Assert.Equal(expected, result);
         }
-    }
+
+		[Theory]
+		[InlineData(new[] { 10, 4, 5, 8, 11, 6, 26 }, 5, 10)]
+		public void KthSmallestElementShouldWorkAsExpected(int[] array, int k, int expected)
+		{
+			var result = GeneralSolutions.KthSmallestElement(array, k);
+
+			Assert.Equal(expected, result);
+		}
+	}
 }
 

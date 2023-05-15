@@ -22,13 +22,33 @@ namespace Sorting
 					if (array[i] == array[j])
 						continue;
 					if (array[i] < array[j])
-						inversionCount++; 
+						inversionCount++;
 				}
 			}
 
 			return inversionCount;
 		}
 
+		public static int KthSmallestElement(int[] array, int k)
+		{
+			int result = -1;
+			int low = 0;
+			int high = array.Length - 1;
+			while (low <= high)
+			{
+				var p = QuickSort.LomutoPartion(array, low, high);
+				if (p == k - 1)
+					return array[p];
+
+				if (p > k - 1)
+					high = p - 1;
+
+				if (p < k - 1)
+					low = p + 1; 
+			}
+
+			return result;
+		}
 	}
 }
 
