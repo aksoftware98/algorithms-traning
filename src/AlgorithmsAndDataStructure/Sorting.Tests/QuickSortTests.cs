@@ -6,7 +6,7 @@
         [InlineData(new[] { 3, 2, 1, 78, 9798, 97 }, 0, 5, new[] { 3, 2, 1, 78, 97, 9798})]
         public void NaviePartioningShoudWorkAsExpected(int[] array, int low, int high, int[] expected)
         {
-            QuickSort.PartionNaive(array, low, high);
+            QuickSort.PartitionNaive(array, low, high);
 
             Assert.True(array.SequenceEqual(expected));
         }
@@ -22,13 +22,31 @@
         }
 
         [Theory]
-        [InlineData(new[] { 5, 3, 8, 4, 2, 7, 1, 10 }, 0, 7, new[] { 1, 3, 2, 4, 8, 7, 5, 10 }, 4)]
+        [InlineData(new[] { 10, 7, 8, 9, 1, 5 }, 0, 5, new[] { 5, 7, 8, 9, 1, 10 }, 4)]
         public void HoarePartioningShoudWorkAsExpected(int[] array, int low, int high, int[] expectedArray, int expectedIndex)
         {
             var result = QuickSort.HoarePartition(array, low, high);
 
             Assert.True(array.SequenceEqual(expectedArray));
             Assert.Equal(expectedIndex, result);
+        }
+
+        [Theory]
+        [InlineData(new[] { 8, 4, 7, 9, 3, 10, 5 }, 0, 6, new[] { 3, 4, 5, 7, 8, 9, 10 })]
+        public void QuickSortWithLomutoPartitionShouldWorkAsExpected(int[] array, int low, int high, int[] expected)
+        {
+            QuickSort.SortWithLomutoPartition(array, low, high);
+
+            Assert.True(array.SequenceEqual(expected)); 
+        }
+
+        [Theory]
+        [InlineData(new[] { 8, 4, 7, 9, 3, 10, 5 }, 0, 6, new[] { 3, 4, 5, 7, 8, 9, 10 })]
+        public void QuickSortWithHoarePartitionShouldWorkAsExpected(int[] array, int low, int high, int[] expected)
+        {
+            QuickSort.SortWithHoarePartition(array, low, high);
+
+            Assert.True(array.SequenceEqual(expected));
         }
     }
 }

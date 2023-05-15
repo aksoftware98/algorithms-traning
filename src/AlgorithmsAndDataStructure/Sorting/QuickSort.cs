@@ -3,11 +3,17 @@ namespace Sorting
 {
 	/// <summary>
 	/// Unstable sorting Algorithm 
+	/// QuickSort divide and conquer algorithm 
+	/// O(n^2) worst case 
+	/// It's in place
+	/// cache friendly 
+	/// Average case is N(log(N)
+	/// Tail recursion 
 	/// </summary>
 	public static class QuickSort
 	{
 
-		public static void PartionNaive<T>(T[] array, int low, int height) where T : IComparable<T>
+		public static void PartitionNaive<T>(T[] array, int low, int height) where T : IComparable<T>
 		{
 			var pivot = array[height];
 			var tempArray = new T[array.Length];
@@ -88,7 +94,7 @@ namespace Sorting
 				} while (array[j].CompareTo(pivot) == 1);
 				if (j <= i)
 				{
-					return j + 1;
+					return j;
 				}
 
 				var temp = array[j];
@@ -98,6 +104,26 @@ namespace Sorting
 
         }
 
+
+		public static void SortWithLomutoPartition<T>(T[] array, int low, int high) where T : IComparable<T> 
+		{
+			if (low < high)
+			{
+				int p = LomutoPartion(array, low, high);
+				SortWithLomutoPartition(array, low, p - 1);
+				SortWithLomutoPartition(array, p + 1, high);
+			}
+		}
+
+		public static void SortWithHoarePartition<T>(T[] array, int low, int high) where T : IComparable<T>
+		{
+			if (low < high)
+			{
+				var p = HoarePartition(array, low, high);
+				SortWithHoarePartition(array, low, p);
+				SortWithHoarePartition(array, p + 1, high);
+			}
+		}
 
 
     }
