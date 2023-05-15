@@ -28,6 +28,15 @@
 
 			Assert.Equal(expected, result);
 		}
+
+		[Theory]
+		[InlineData(new[] { 7, 3, 1, 8, 9 , 12, 56 }, 3, 2)]
+		public void ChocolateDistributionProblemShouldWorkAsExpected(int[] array, int m,int expected)
+		{
+			var result = GeneralSolutions.ChocolateDistributionProblem(array, m);
+
+			Assert.Equal(expected, result);
+		}
 	}
 }
 

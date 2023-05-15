@@ -74,6 +74,27 @@ namespace Sorting
 
 			return result; 
 		}
+
+		public static int ChocolateDistributionProblem(int[] array, int m)
+		{
+			int result = -1;
+			int n = array.Length;
+			if (m > n)
+				return result;
+
+			QuickSort.SortWithLomutoPartition(array, 0, n - 1);
+
+			result = array[m - 1] - array[0];
+			for (int i = 1; (i + m - 1) < n; i++)
+			{
+				var value = (array[i + m - 1] - array[i]);
+                if (value < result)
+                {
+					result = value; 
+                }
+            }
+			return result; 
+		}
 	}
 }
 
