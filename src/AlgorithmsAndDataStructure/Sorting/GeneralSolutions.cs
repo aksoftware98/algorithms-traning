@@ -49,6 +49,31 @@ namespace Sorting
 
 			return result;
 		}
+
+		public static int FindMinimumDifferenceInArray(int[] array)
+		{
+			int result = -1;
+			MergeSort.Sort(array, 0, array.Length - 1);
+
+			if (array.Length <= 1)
+				return result;
+
+			for (int i = 1; i < array.Length; i++)
+			{
+				var diff = array[i] - array[i - 1];
+				if (i == 1)
+				{
+					result = diff;
+					continue; 
+				}
+
+				if (diff < result)
+					result = diff;
+
+			}
+
+			return result; 
+		}
 	}
 }
 

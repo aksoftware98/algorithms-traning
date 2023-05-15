@@ -19,6 +19,15 @@
 
 			Assert.Equal(expected, result);
 		}
+
+		[Theory]
+		[InlineData(new[] { 10, 3, 20, 12 }, 2)]
+		public void FindMinimumDifferenceInArrayShouldWorkAsExpected(int[] array, int expected)
+		{
+			var result = GeneralSolutions.FindMinimumDifferenceInArray(array);
+
+			Assert.Equal(expected, result);
+		}
 	}
 }
 
