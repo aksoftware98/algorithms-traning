@@ -9,6 +9,7 @@ namespace Sorting
 	/// cache friendly 
 	/// Average case is N(log(N)
 	/// Tail recursion 
+	/// To prevent the worst cases, it's good to grab a random number as a the pivot, then switch it to first or last based on the parition algorithm 
 	/// </summary>
 	public static class QuickSort
 	{
