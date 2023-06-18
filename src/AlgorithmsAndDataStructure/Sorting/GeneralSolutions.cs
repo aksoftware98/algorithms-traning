@@ -171,6 +171,34 @@ namespace Sorting
 
 		}
 
+		public static int MeetingMaximumGuests(int[] arrivals, int[] departures)
+		{
+			QuickSort.SortWithLomutoPartition(arrivals, 0, arrivals.Length - 1);	
+			QuickSort.SortWithLomutoPartition(departures, 0, departures.Length - 1);
+
+			int i = 1;
+			int j = 0;
+			int result = 1;
+			int currentGuests = 1;
+			int count = arrivals.Length; 
+			while (i < count && j < count)
+			{
+				if (arrivals[i] <= departures[j])
+				{
+					currentGuests++;
+					i++;
+				}
+				else
+				{
+					currentGuests--;
+					j++;
+				}
+				result = Math.Max(result, currentGuests);
+			}
+
+			return result; 
+		}
+
 		public class Interval : IComparable<Interval>
 		{
 			public Interval(int startValue, int endValue)

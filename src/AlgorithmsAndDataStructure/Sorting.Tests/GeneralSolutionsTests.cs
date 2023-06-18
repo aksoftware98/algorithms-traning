@@ -71,6 +71,21 @@ namespace Sorting.Tests
 			var result = GeneralSolutions.MergeOverlapIntervalsEfficient(intervals);
 
 		}
+
+		// --- MeetingMaximumGuests ---
+
+		[Theory]
+		[InlineData(new int[] { 900, 600, 700 }, new int[] { 1000, 800, 730 }, 2)]
+		public void MeetingMaximumGuests_ValidInput_ReturnsExpectedResult(int[] arrivals, int[] departures, int expectedResult)
+		{
+			// Arrange
+			var expected = expectedResult;
+			// Act
+			var result = GeneralSolutions.MeetingMaximumGuests(arrivals, departures);
+			// Assert
+			Assert.Equal(expected, result);
+		}
+
 	}
 }
 
