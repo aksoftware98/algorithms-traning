@@ -1,4 +1,6 @@
-﻿namespace Sorting.Tests
+﻿using static Sorting.GeneralSolutions;
+
+namespace Sorting.Tests
 {
     public class GeneralSolutionsTests
     {
@@ -36,6 +38,38 @@
 			var result = GeneralSolutions.ChocolateDistributionProblem(array, m);
 
 			Assert.Equal(expected, result);
+		}
+
+
+		[Fact]
+		public void MergeOverlappingIntervalsShouldWorkAsExpected()
+		{
+			var intervals = new[]
+			{
+				new Interval(7, 9),
+				new Interval(6, 10),
+				new Interval(4, 5),
+				new Interval(1, 3),
+				new Interval(2, 4),
+			};
+
+			var result = GeneralSolutions.MergeOverlappingIntervals(intervals);
+
+		}
+
+		[Fact]
+		public void MergeOverlappingIntervalsShouldWorkAsExpected2()
+		{
+			var intervals = new[]
+			{
+				new Interval(1, 3),
+				new Interval(2, 4),
+				new Interval(5, 7),
+				new Interval(6, 8),
+			};
+
+			var result = GeneralSolutions.MergeOverlapIntervalsEfficient(intervals);
+
 		}
 	}
 }

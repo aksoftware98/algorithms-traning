@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Runtime.CompilerServices;
+
 namespace Sorting
 {
 	/// <summary>
@@ -94,6 +97,99 @@ namespace Sorting
                 }
             }
 			return result; 
+		}
+
+		public static Interval[] MergeOverlappingIntervals(Interval[] intervals)
+		{
+			var result = new List<Interval>();
+
+			QuickSort.SortWithLomutoPartition(intervals, 0, intervals.Length - 1);
+
+			int currentMinimum = intervals[0].StartValue; 
+			int currentMaximum = intervals[0].EndValue;
+			int overlapsCount = 0; 
+			for (int i = 0; i < intervals.Length - 1; i++)
+			{
+				var currentStartValue = intervals[i].StartValue;
+				var currentEndValue = intervals[i].EndValue;
+				var nextStartValue = intervals[i + 1].StartValue;
+				var nextEndValue = intervals[i + 1].EndValue;
+
+                if (currentStartValue.CompareTo(currentMinimum) == -1)
+					currentMinimum = currentStartValue; 
+				if (currentEndValue.CompareTo(currentMaximum) == 1)
+					currentMaximum = currentEndValue;
+
+                if (intervals[i].EndValue.CompareTo(intervals[i + 1].StartValue) == -1)
+				{
+					overlapsCount++;
+					result.Add(new Interval(currentMinimum, currentMaximum));
+					currentMinimum = intervals[i + 1].StartValue;
+					currentMaximum = intervals[i + 1].EndValue;
+				}
+
+				if (i == intervals.Length - 2)
+				{
+					if (nextStartValue.CompareTo(currentMinimum) == -1)
+						currentMinimum = nextStartValue;
+					if (nextEndValue.CompareTo(currentMaximum) == 1)
+						currentMaximum = nextEndValue;
+					overlapsCount++;
+					result.Add(new Interval(currentMinimum, currentMaximum));
+				}
+			}
+
+			return result.ToArray(); 
+		}
+
+		public static Interval[] MergeOverlapIntervalsEfficient(Interval[] intervals)
+		{
+			QuickSort.SortWithLomutoPartition(intervals, 0, intervals.Length - 1);
+			var results = new List<Interval>();
+			int index = 0;
+			
+			for (int i = 1; i < intervals.Length; i++)
+			{
+				if (intervals[index].EndValue.CompareTo(intervals[i].StartValue) == 1)
+				{
+					intervals[index].EndValue = Math.Max(intervals[index].EndValue, intervals[i].EndValue);
+					intervals[index].StartValue = Math.Min(intervals[i].StartValue, intervals[index].StartValue);
+				}
+				else
+				{
+					index++;
+					intervals[index] = intervals[i]; 
+				}
+			}
+
+			for (int i = 0; i <= index; i++)
+			{
+				results.Add(intervals[i]);
+			}
+
+			return results.ToArray();
+
+		}
+
+		public class Interval : IComparable<Interval>
+		{
+			public Interval(int startValue, int endValue)
+			{
+				StartValue = startValue;
+				EndValue = endValue;
+			}
+
+			public int StartValue { get; set; }
+
+			public int EndValue { get; set; }
+
+			public int CompareTo(Interval? other)
+			{
+				if (other == null)
+					return 1;
+				
+				return StartValue.CompareTo(other.StartValue);
+			}
 		}
 	}
 }
