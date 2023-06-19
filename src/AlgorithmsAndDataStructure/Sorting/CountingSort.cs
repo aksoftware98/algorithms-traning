@@ -10,7 +10,7 @@ namespace Sorting
 
 	/// <summary>
 	/// Counting Sort is a non-comparison integer sorting algorithm. It sorts an array based on the keys that are small integers.
-	/// It's stable 
+	/// It's stable and runs in O(n + k) time, where n is the number of elements in the array and k is the range of the non-negative key values.
 	/// </summary>
 	public class CountingSort
 	{
