@@ -33,6 +33,28 @@ namespace Sorting
 			}
 		}
 
+
+		public static void SortInt(int[] array)
+		{
+			for (int i = 0; i < array.Length; i++)
+			{
+				int minIndex = i;
+				for (int j = minIndex; j < array.Length; j++)
+				{
+					if (array[j] < array[minIndex])
+					{
+						minIndex = j;
+					}
+				}
+
+				if (i != minIndex)
+				{
+					var temp = array[minIndex];
+					array[minIndex] = array[i];
+					array[i] = temp;
+				}
+			}
+		}
 	}
 }
 
