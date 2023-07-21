@@ -35,3 +35,37 @@ public class BinarySearchSymbolTableTests
 	}
 
 }
+
+public class BSTSymbolTableTests
+{
+	[Fact]
+	public void BSTSymbolTable_ShouldWork_AsExpected()
+	{
+		var bst = new BinarySearchTreeSymbolTable<string, int>();
+
+		bst.Insert("E", 44);
+		bst.Insert("N", 14);
+		bst.Insert("R", 54);
+		bst.Insert("W", 74);
+		bst.Insert("Q", 43);
+		bst.Insert("H", 64);
+		bst.Insert("F", 58);
+		bst.Insert("X", 17);
+		bst.Insert("Z", 31);
+		bst.Insert("P", 70);
+		bst.Insert("T", 79);
+		bst.Insert("U", 20);
+		bst.Insert("O", 31);
+
+		Assert.Equal(14, bst.Search("N"));
+		Assert.Equal(20, bst.Search("U"));
+
+		bst.Delete("R");
+
+		bst.DeleteMin();
+		bst.DeleteMax();
+
+
+
+	}
+}
