@@ -107,7 +107,7 @@ public class BinarySearchSymbolTable<TKey, TValue> where TKey : IComparable<TKey
 			throw new ArgumentNullException(nameof(key));
 
 		int low = 0;
-		int high = _n;
+		int high = _n - 1;
 		while (low <= high)
 		{
 			int mid = low + (high - low) / 2;
