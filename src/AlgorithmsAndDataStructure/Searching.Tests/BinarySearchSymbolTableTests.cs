@@ -61,8 +61,8 @@ public class BSTSymbolTableTests
 
 		Assert.Equal("Z", bst.Select(12));
 
-		Assert.Equal(14, bst.Search("N"));
-		Assert.Equal(20, bst.Search("U"));
+		Assert.Equal(14, bst.SearchLoop("N"));
+		Assert.Equal(20, bst.SearchLoop("U"));
 
 		bst.Delete("R");
 

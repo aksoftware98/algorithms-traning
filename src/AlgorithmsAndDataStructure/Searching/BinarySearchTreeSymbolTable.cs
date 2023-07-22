@@ -64,6 +64,32 @@ namespace Searching
 				return Search(key, node.Left);
 		}
 
+		public TValue SearchLoop(TKey key)
+		{
+			if (key == null)
+				throw new ArgumentNullException(nameof(key));
+
+			TValue? value = default;
+			Node? node = Root;
+			while(node != null)
+			{
+				var compare = key.CompareTo(node.Key);
+				if (compare > 0 && node.Right != null)
+				{
+					node = node.Right;
+				}
+				else if (compare < 0 && node.Left != null)
+				{
+					node = node.Left;
+				}
+				else
+				{
+					return node.Value;
+				}
+			}
+			return value; 
+		}
+
 		public void Insert(TKey key, TValue value)
 		{
 			Root = Insert(key, value, Root);
