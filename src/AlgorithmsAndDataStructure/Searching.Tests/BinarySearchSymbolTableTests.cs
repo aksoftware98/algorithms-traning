@@ -57,7 +57,9 @@ public class BSTSymbolTableTests
 		bst.Insert("U", 20);
 		bst.Insert("O", 31);
 
-		Assert.Equal("N", bst.Select(3));
+		var range = bst.Range("Q", "Z");
+
+		Assert.Equal("Z", bst.Select(12));
 
 		Assert.Equal(14, bst.Search("N"));
 		Assert.Equal(20, bst.Search("U"));

@@ -182,6 +182,20 @@ namespace Searching
 			return Min(node.Left);
 		}
 
+		public TKey Max()
+		{
+			if (Root == null)
+				throw new InvalidOperationException("Tree is empty");
+			return Max(Root).Key;
+		}
+
+		public Node Max(Node? node)
+		{
+			if (node == null)
+				return null; 
+			return Max(node.Right);
+		}
+
 		public TKey Select(int rank)
 		{
 			if (rank < 0 || rank >= Count)
@@ -206,6 +220,32 @@ namespace Searching
 			}
 			else
 				return node;
+		}
+
+		public IEnumerable<TKey> All()
+		{
+			return Range(Min(), Max());
+		}
+
+		public IEnumerable<TKey> Range(TKey low, TKey high)
+		{
+			var queue = new Queue<TKey>();
+			AddKeysToQueue(Root, low, high, queue);
+			return queue;
+		}
+
+		private void AddKeysToQueue(Node? node, TKey low, TKey high, Queue<TKey> queue)
+		{
+			if (node == null)
+				return;
+			var compareLow = low.CompareTo(node.Key);
+			var compareHigh = high.CompareTo(node.Key);
+			if (compareLow < 0)
+				AddKeysToQueue(node.Left, low, high, queue);
+			if (compareHigh > 0)
+				AddKeysToQueue(node.Right, low, high, queue);
+			if (compareLow <= 0 && compareHigh >= 0)
+				queue.Enqueue(node.Key);
 		}
 	}
 }
