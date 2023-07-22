@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -179,6 +180,32 @@ namespace Searching
 			if (node.Left == null)
 				return node;
 			return Min(node.Left);
+		}
+
+		public TKey Select(int rank)
+		{
+			if (rank < 0 || rank >= Count)
+				throw new ArgumentOutOfRangeException(nameof(rank));
+
+			return Select(Root, rank).Key;
+		}
+
+		public Node Select(Node node, int rank)
+		{
+			if (node == null)
+				return null;
+
+			int leftSize = node.Left?.N ?? 0;
+			if (leftSize > rank)
+			{
+				return Select(node.Left, rank);
+			}
+			else if (leftSize < rank)
+			{
+				return Select(node.Right, rank - leftSize - 1);
+			}
+			else
+				return node;
 		}
 	}
 }
