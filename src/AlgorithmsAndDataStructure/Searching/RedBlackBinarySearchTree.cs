@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -51,12 +52,12 @@ public class RedBlackBinarySearchTree<TKey, TValue> where TKey : IComparable<TKe
 	{
 		if (node == null) return null;
 		var rightNode = node.Right;
-		rightNode.Left = node;
 		node.Right = rightNode.Left;
+		rightNode.Left = node;
 		rightNode.Color = node.Color;
 		node.Color = Red;
 		rightNode.Count = node.Count;
-		node.Count = (rightNode?.Left?.Count ?? 0) + 1 + (rightNode?.Right?.Count ?? 0);
+		node.Count = (node.LeftCount) + 1 + (node.RightCount);
 		return rightNode;
 	}
 
@@ -64,12 +65,12 @@ public class RedBlackBinarySearchTree<TKey, TValue> where TKey : IComparable<TKe
 	{
 		if (node == null) return null;
 		var leftNode = node.Left;
-		leftNode.Right = node;
 		node.Left = leftNode.Right;
+		leftNode.Right = node;
 		leftNode.Color = node.Color;
 		node.Color = Red;
 		leftNode.Count = node.Count;
-		node.Count = 1 + leftNode.LeftCount + leftNode.RightCount;
+		node.Count = 1 + node.LeftCount + node.RightCount;
 		return leftNode;
 	}
 
@@ -107,6 +108,8 @@ public class RedBlackBinarySearchTree<TKey, TValue> where TKey : IComparable<TKe
 
 	private bool IsRed(Node node)
 	{
+		if (node == null)
+			return false;
 		return node.Color == Red;
 	}
 
@@ -136,9 +139,9 @@ public class RedBlackBinarySearchTree<TKey, TValue> where TKey : IComparable<TKe
 		else
 			node.Left = Insert(key, value, node.Left);
 
-		if (IsRed(node.Left) && !IsRed(node.Right))
+		if (IsRed(node.Right) && !IsRed(node.Left))
 			node = RotateLeft(node);
-		if (!IsRed(node.Left) && IsRed(node.Right))
+		if (IsRed(node.Left) && IsRed(node?.Left?.Left))
 			node = RotateRight(node);
 		if (IsRed(node.Left) && IsRed(node.Right))
 			FlipColors(node);
