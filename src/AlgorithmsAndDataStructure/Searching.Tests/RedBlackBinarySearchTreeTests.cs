@@ -28,6 +28,10 @@ public class RedBlackBinarySearchTreeTests
 		Assert.Equal(3, bst.Search("S"));
 		Assert.Equal(51, bst.Search("X"));
 		Assert.Equal(12, bst.Search("L"));
+
+
+		Assert.Equal("X", bst.Max());
+		Assert.Equal("A", bst.Min());
 	}
 
 }

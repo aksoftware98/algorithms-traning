@@ -151,4 +151,42 @@ public class RedBlackBinarySearchTree<TKey, TValue> where TKey : IComparable<TKe
 	}
 	#endregion 
 
+	public TKey? Min()
+	{
+		if (Root == null)
+			throw new InvalidOperationException("Tree is empty");
+
+		return Min(Root);
+	}
+
+	public TKey? Min(Node? node)
+	{
+		if (node == null)
+			return default;
+
+		if (node.Left == null)
+			return node.Key;
+		else
+			return Min(node.Left);
+	}
+
+	public TKey? Max()
+	{
+		if (Root == null)
+			throw new InvalidOperationException("Tree is empty");
+
+		return Max(Root);
+	}
+
+	public TKey? Max(Node? node)
+	{
+		if (node == null)
+			return default;
+
+		if (node.Right == null)
+			return node.Key;
+		else
+			return Max(node.Right);
+	}
+
 }
