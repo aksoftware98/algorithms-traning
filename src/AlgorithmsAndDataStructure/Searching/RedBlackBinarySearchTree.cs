@@ -189,4 +189,18 @@ public class RedBlackBinarySearchTree<TKey, TValue> where TKey : IComparable<TKe
 			return Max(node.Right);
 	}
 
+	public Node MoveRedLeft(Node node)
+	{
+		FlipColors(node);
+
+		if (IsRed(node.Right.Left))
+		{
+			node.Right = RotateRight(node.Right);
+			node = RotateLeft(node.Left);
+			FlipColors(node);
+		}
+
+		return node;
+	}
+
 }
