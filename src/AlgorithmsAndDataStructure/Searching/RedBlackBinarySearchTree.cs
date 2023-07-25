@@ -203,4 +203,59 @@ public class RedBlackBinarySearchTree<TKey, TValue> where TKey : IComparable<TKe
 		return node;
 	}
 
+	public Node MoveRedRight(Node node)
+	{
+		FlipColors(node);
+		if (IsRed(node.Left?.Left))
+		{
+			node = RotateRight(node);
+			FlipColors(node);
+		}
+
+		return node;
+	}
+
+	public void DeleteMin()
+	{
+		if (Root == null)
+			throw new InvalidOperationException("Tree is empty");
+
+		if (!IsRed(Root.Left) && !IsRed(Root.Right))
+			Root.Color = Red;
+
+		Root = DeleteMin(Root);
+		if (Root != null)
+			Root.Color = Black;
+	}
+
+	public Node DeleteMin(Node node)
+	{
+		if (node.Left == null)
+			return null;
+
+		if (!IsRed(node.Left) && !IsRed(node.Left?.Left))
+			node = MoveRedLeft(node);
+
+		node.Left = DeleteMin(node.Left);
+		return Balance(node);
+	}
+
+	public Node Balance(Node node)
+	{
+		if (node == null)
+			return null;
+
+		if (IsRed(node.Right) && !IsRed(node.Left))
+			node = RotateLeft(node);
+
+		if (IsRed(node.Left) && IsRed(node.Left?.Left))
+			node = RotateRight(node);
+
+		if (IsRed(node.Left) && IsRed(node.Right))
+			FlipColors(node);
+
+		node.Count = 1 + node.LeftCount + node.RightCount;
+		return node;
+	}
+
 }

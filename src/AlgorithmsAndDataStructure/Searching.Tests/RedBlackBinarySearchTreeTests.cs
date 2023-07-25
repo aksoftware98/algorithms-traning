@@ -24,7 +24,9 @@ public class RedBlackBinarySearchTreeTests
 		bst.Insert("M", 23);
 		bst.Insert("P", 51);
 		bst.Insert("L", 12);
-		
+
+		bst.DeleteMin();
+
 		Assert.Equal(3, bst.Search("S"));
 		Assert.Equal(51, bst.Search("X"));
 		Assert.Equal(12, bst.Search("L"));
