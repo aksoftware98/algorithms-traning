@@ -55,18 +55,23 @@
 
         public void Delete(TKey key)
         {
+            // Check if the key is existing
             if (Get(key) == null)
 				return;
 
+            // Find the index of the key
             int i = Hash(key);
             while (!_keys[i].Equals(key))
                 i = (i + 1) % _m;
 
+            // Set the key index to empty
             _keys[i] = default;
             _values[i] = default;
 
+            // Move one index ahead
             i = (i + 1) % _m;
 
+            // Try to replace all the keys on the right side again by redoing them
             while (_keys[i] != null)
             {
                 TKey keyToRedo = _keys[i];
@@ -78,6 +83,7 @@
                 i = (i + 1) % _m;
             }
             _n--;
+            // Resize the array if needed
             if (_n > 0 && _n == _m / 8)
                 Resize();
         }
